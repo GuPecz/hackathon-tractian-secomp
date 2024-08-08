@@ -16,7 +16,7 @@ def encode_image(image_path):
     return base64.b64encode(image_file.read()).decode('utf-8')
 
 # Path to your image
-data_folder = "./10"
+data_folder = "./8"
 #foto_placa = data_folder+"/image1.jpg"
 #foto_equipamento = data_folder+"/image2.jpg"
 #foto_lugar = data_folder+"/image3.jpg"
@@ -66,7 +66,6 @@ completion = client.chat.completions.create(
   model="gpt-4o-mini",
   messages = [
     {"role": "system", "content": system_prompt},
-    {"role": "user", "content": json.dumps(data)},
     {
         "role": "user", "content": [
         {"type": "text", "text": user_prompt[0]},
@@ -93,6 +92,7 @@ completion = client.chat.completions.create(
         }
       ],
     },
+    #{"role": "user", "content": json.dumps(data)},
   ],  
   max_tokens=300,
 )
