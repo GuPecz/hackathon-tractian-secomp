@@ -12,36 +12,18 @@
         <tr>
             <th>ID</th>
             <th>Nome</th>
+            <th>Fabricante</th>
         </tr>
         {% for ficha in fichas %}
         <tr>
             <td>{{ ficha.id }}</td>
             <td>{{ ficha.nome }}</td>
+            <td>{{ ficha.fabricante }}</td>
         </tr>
         {% endfor %}
     </table>
-    <button onclick="exportCsv()">Exportar CSV</button><br>
     <div id="csv"></div>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            window.exportCsv = async () => {
-                try {
-                    const response = await fetch("{% url 'integration:export_csv' %}", {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRFToken': getCookie('csrftoken')
-                        },
-                    });
-                    const csv = document.getElementById('csv')
-                    csv.innerHTML = 'Exportado para fichas_tecnicas.csv'
-                    // lê e adiciona o csv ao html
-                } catch (error) {
-                    console.error('Error:', error);
-                }
-            }
-        })
-
     </script>
 </body>
 </html>

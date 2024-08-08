@@ -79,7 +79,6 @@
 
 
     <script>
-        // Função para mostrar a pré-visualização da imagem
         function previewImage(input, previewId, boxId) {
             const file = input.files[0];
             const reader = new FileReader();
@@ -88,18 +87,17 @@
 
             reader.onload = function (e) {
                 img.src = e.target.result;
-                img.style.display = 'block'; // Mostra a imagem
+                img.style.display = 'block';
             };
 
             if (file) {
-                img.style.display = 'block'; // Mostra a imagem
+                img.style.display = 'block';
                 reader.readAsDataURL(file);
             } else {
-                img.style.display = 'none'; // Oculta a imagem
+                img.style.display = 'none';
             }
         }
 
-        // Adiciona event listeners para mostrar as imagens quando selecionadas
         document.getElementById('image1').addEventListener('change', function () {
             previewImage(this, 'preview1', 'preview-box1');
         });
@@ -116,39 +114,35 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
         window.sendData = async () => {
-            // Get form field values
             const nome = document.getElementById("nome").value;
             const fabricante = document.getElementById("fabricante").value;
             const tipo = document.getElementById("tipo").value;
-            const img1 = document.getElementById("image1").files[0]; // Use .files[0] to get the actual file
+            const img1 = document.getElementById("image1").files[0];
             const img2 = document.getElementById("image2").files[0];
             const img3 = document.getElementById("image3").files[0];
 
-            // Validate inputs
             if (nome.length === 0 || fabricante.length === 0 || !img1 || !img2 || !img3) {
                 alert('Você não preencheu todos os campos ou não enviou as três imagens');
                 return;
             }
 
-            // Create a FormData object
             const formData = new FormData();
             formData.append('nome', nome);
             formData.append('tipo', tipo);
             formData.append('fabricante', fabricante);
-            formData.append('img1', img1); // Append the actual file
+            formData.append('img1', img1);
             formData.append('img2', img2);
             formData.append('img3', img3);
 
             try {
                 const response = await fetch("{% url 'integration:register' %}", {
                     method: 'POST',
-                    body: formData, // Use FormData as the body
+                    body: formData,
                     headers: {
-                        'X-CSRFToken': getCookie('csrftoken') // Include CSRF token
+                        'X-CSRFToken': getCookie('csrftoken')
                     },
                 });
 
-                // Check if response is okay
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
