@@ -16,7 +16,7 @@ def encode_image(image_path):
     return base64.b64encode(image_file.read()).decode('utf-8')
 
 # Path to your image
-data_folder = "./4"
+data_folder = "./10"
 #foto_placa = data_folder+"/image1.jpg"
 #foto_equipamento = data_folder+"/image2.jpg"
 #foto_lugar = data_folder+"/image3.jpg"
