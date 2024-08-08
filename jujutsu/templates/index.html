@@ -1,0 +1,182 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cadastramento de maquinário</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>
+</head>
+
+<body>
+    <div class="top-link">
+        <a href="{% url 'integration:listagem' %}">Ir para listagem</a>
+    </div>
+    <div class="form-container">
+        <form method="POST" enctype="multipart/form-data" action="/register">
+            <h1>Informações da máquina<h1>
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="nome">Nome da máquina:</label>
+                        <input type="text" id="nome" name="nome" placeholder="Ex.: Motor LA 123" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo">Tipo de máquina:</label>
+                        <select id="tipo" name="tipo" required>
+                            <option value="">Selecione...</option>
+                            <option value="bearing-rolling">bearing-rolling</option>
+                            <option value="compressor-screw">compressor-screw</option>
+                            <option value="electricMotor">electricMotor</option>
+                            <option value="electricMotor-threePhase">electricMotor-threePhase</option>
+                            <option value="fan">fan</option>
+                            <option value="generator">generator</option>
+                            <option value="other">other</option>
+                            <option value="pump-centrifugal">pump-centrifugal</option>
+                            <option value="pump-gear">pump-gear</option>
+                            <option value="reductorGearbox">reductorGearbox</option>
+                            <option value="reductorGearbox-bevelGear">reductorGearbox-bevelGear</option>
+                            <option value="reductorGearbox-parallelShaft">reductorGearbox-parallelShaft</option>
+                            <option value="reductorGearbox-wormGear">reductorGearbox-wormGear</option>
+                            <option value="servoMotor">servoMotor</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="fabricante">Fabricante:</label>
+                        <input type="text" id="fabricante" name="fabricante" placeholder="Ex.: WSG" required>
+                    </div>
+
+                    <h1>Imagens da máquina</h1>
+                    <div class="image-upload-container">
+                        
+                        <div class="image-upload">
+                            <label for="image1">Foto do lugar:</label>
+                            <input type="file" id="image1" accept="image/*">
+                            <div class="preview-box" id="preview-box1">
+                                <img upload_to="" id="preview1" alt="Preview da Imagem 1">
+                            </div>
+                        </div>
+                        
+                        <div class="image-upload">
+                            <label for="image2">Foto do equipamento:</label>
+                            <input type="file" id="image2" accept="image/*">
+                            <div class="preview-box" id="preview-box2">
+                                <img id="preview2" alt="Preview da Imagem 2">
+                            </div>
+                        </div>
+                        
+                        <div class="image-upload">
+                            <label for="image3">Foto do placa:</label>
+                            <input type="file" id="image3" accept="image/*">
+                            <div class="preview-box" id="preview-box3">
+                                <img id="preview3" alt="Preview da Imagem 3">
+                            </div>
+                        </div>
+                    </div>
+        </form>
+        <button onclick="sendData()">Atualizar ficha técnica</button>
+        <div id="informacoes"></div>
+    </div>
+
+
+    <script>
+        // Função para mostrar a pré-visualização da imagem
+        function previewImage(input, previewId, boxId) {
+            const file = input.files[0];
+            const reader = new FileReader();
+            const previewBox = document.getElementById(boxId);
+            const img = document.getElementById(previewId);
+
+            reader.onload = function (e) {
+                img.src = e.target.result;
+                img.style.display = 'block'; // Mostra a imagem
+            };
+
+            if (file) {
+                img.style.display = 'block'; // Mostra a imagem
+                reader.readAsDataURL(file);
+            } else {
+                img.style.display = 'none'; // Oculta a imagem
+            }
+        }
+
+        // Adiciona event listeners para mostrar as imagens quando selecionadas
+        document.getElementById('image1').addEventListener('change', function () {
+            previewImage(this, 'preview1', 'preview-box1');
+        });
+
+        document.getElementById('image2').addEventListener('change', function () {
+            previewImage(this, 'preview2', 'preview-box2');
+        });
+
+        document.getElementById('image3').addEventListener('change', function () {
+            previewImage(this, 'preview3', 'preview-box3');
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        window.sendData = async () => {
+            // Get form field values
+            const nome = document.getElementById("nome").value;
+            const fabricante = document.getElementById("fabricante").value;
+            const tipo = document.getElementById("tipo").value;
+            const img1 = document.getElementById("image1").files[0]; // Use .files[0] to get the actual file
+            const img2 = document.getElementById("image2").files[0];
+            const img3 = document.getElementById("image3").files[0];
+
+            // Validate inputs
+            if (nome.length === 0 || fabricante.length === 0 || !img1 || !img2 || !img3) {
+                alert('Você não preencheu todos os campos ou não enviou as três imagens');
+                return;
+            }
+
+            // Create a FormData object
+            const formData = new FormData();
+            formData.append('nome', nome);
+            formData.append('tipo', tipo);
+            formData.append('fabricante', fabricante);
+            formData.append('img1', img1); // Append the actual file
+            formData.append('img2', img2);
+            formData.append('img3', img3);
+
+            try {
+                const response = await fetch("{% url 'integration:register' %}", {
+                    method: 'POST',
+                    body: formData, // Use FormData as the body
+                    headers: {
+                        'X-CSRFToken': getCookie('csrftoken') // Include CSRF token
+                    },
+                });
+
+                // Check if response is okay
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const responseData = await response.json();
+                console.log('responseData: ', responseData);
+                
+                const informacoes = document.getElementById('informacoes');
+                informacoes.innerHTML = '<div id="specSheet">';
+                Object.keys(responseData).forEach(category => {
+                    informacoes.innerHTML += `<h1>${category}</h1>\n<div class="spec-grid">`;
+                    Object.keys(responseData[category]).forEach(info => {
+                        informacoes.innerHTML += `<div class="spec-item">
+                                                        <h3>${info}</h3>
+                                                        <div id="info">
+                                                            <p>${responseData[category][info]}</p>
+                                                        </div>
+                                                    </div>`;
+                    });
+                    informacoes.innerHTML += '</div>';
+                });
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Erro ao enviar dados. Tente novamente.');
+            }
+        };
+    })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <a href="{% url 'index' %}">Ir para cadastro de máquina</a><br>
+    <title>Listagem</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles2.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+        </tr>
+        {% for ficha in fichas %}
+        <tr>
+            <td>{{ ficha.id }}</td>
+            <td>{{ ficha.nome }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <button onclick="exportCsv()">Exportar CSV</button><br>
+    <div id="csv"></div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            window.exportCsv = async () => {
+                try {
+                    const response = await fetch("{% url 'integration:export_csv' %}", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': getCookie('csrftoken')
+                        },
+                    });
+                    const csv = document.getElementById('csv')
+                    csv.innerHTML = 'Exportado para fichas_tecnicas.csv'
+                    // lê e adiciona o csv ao html
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>
