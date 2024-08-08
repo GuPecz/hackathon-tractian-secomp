@@ -1,0 +1,96 @@
+name
+1 - 10009204 - MOTOR ROLOS FIXO (LADO B) 40CV
+2 - M-890 SERVOMOTOR DE CARGA
+3 - 616HP01RD01 - Redutor Bomba HP 20 SD01
+4 - 26723 - RD - Eixo de Saída
+5 - MOTOR
+6 - Bomba
+7 - Placas de Contato
+8 - Motor da 2º esteira do Stacker inferior
+9 - MB-2901-A
+10 - Unidade Compressora - Frick 11
+11 - BOMBEADOR CJ 02 ETA SUL A. DO PARQUE - Tag: 08113
+12 - Mancal LA (DG2)
+13 - MOTOREDUTOR ACI ROSC TACHO CRE 2 LB06
+14 - MOTOR LADO ACOPLADO
+15 - Fan Side Bearing
+16 - Motor LA
+17 - Motor 5cv - tras - std
+18 - MOTOR ELÉTRICO LA. CJ.04 CAPTAÇÃO CENTRAL
+19 - Motor de Fin Press 313
+20 - REDUTOR 2 EIXO ENTRADA ACI ROSCA TRANSP EXTRUSAO LM07
+21 - MOTOR POWDER - M5 - 5006487
+22 - Ventilador 2 CP 4206
+23 - EX902 - RD - Transmissão
+24 - Elemento 01 Atlas Copco 01
+25 - Motor Outboard
+26 - Bomba #1
+27 - Motor B2-101780 Mancal Dianteiro
+28 - Carro 2 - Redutor
+29 - MOTOR LA
+30 - REDUTOR ACI ROLO MOLD MOLDADORA LB10
+
+manufacturer
+1 - WEG
+2 - SUMITOMO HEAVY INDUTRIES, LTD.
+3 - STM Bologna
+4 - EISENBEISS
+5 - sew-eurodrive
+6 - Ingersoll
+7 - SEW
+8 - Oemer
+9 - WEG
+10 - YORK
+11 - IMBIL
+12 - AEM
+13 - SEW
+14 - weg
+15 - Dodge
+16 - Leroy Somer
+17 - weg
+18 - WEG
+19 - Us Motors
+20 - ROSSI
+21 - weg
+22 - WEG
+23 - EISENBEISS
+24 - Atlas Copco
+25 - siemens
+26 - KSB
+27 - WEG
+28 - GORATU
+29 - SEW
+30 - SEW
+
+model
+1 - electricMotor-threePhase
+2 - servoMotor
+3 - reductorGearbox
+4 - reductorGearbox-parallelShaft
+5 - electricMotor-threePhase
+6 - pump-gear
+7 - reductorGearbox-wormGear
+8 - electricMotor-threePhase
+9 - electricMotor-threePhase
+10 - compressor-screw
+11 - pump-centrifugal
+12 - generator
+13 - other
+14 - electricMotor-threePhase
+15 - bearing-rolling
+16 - electricMotor-threePhase
+17 - electricMotor-threePhase
+18 - electricMotor-threePhase
+19 - electricMotor
+20 - reductorGearbox-parallelShaft
+21 - electricMotor-threePhase
+22 - fan
+23 - reductorGearbox-parallelShaft
+24 - compressor-screw
+25 - electricMotor-threePhase
+26 - pump-centrifugal
+27 - electricMotor-threePhase
+28 - reductorGearbox-parallelShaft
+29 - electricMotor-threePhase
+30 - reductorGearbox-bevelGear
+

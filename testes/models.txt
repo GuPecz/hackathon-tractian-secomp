@@ -1,0 +1,14 @@
+bearing-rolling
+compressor-screw
+electricMotor
+electricMotor-threePhase
+fan
+generator
+other
+pump-centrifugal
+pump-gear
+reductorGearbox
+reductorGearbox-bevelGear
+reductorGearbox-parallelShaft
+reductorGearbox-wormGear
+servoMotor
